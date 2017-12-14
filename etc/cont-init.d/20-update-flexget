@@ -1,8 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-pip install -U pip
+apk add --no-cache \
+    --repository http://nl.alpinelinux.org/alpine/edge/main \
+    rsync
+
+pip install --no-cache-dir -U pip
 # Make sure to install setuptools version >=36 to avoid a race condition, see:
 # https://github.com/pypa/setuptools/issues/951
-pip install -U setuptools>=36
-pip install -U urllib3[socks]
-pip install -U flexget
+pip install --no-cache-dir -U setuptools>=36 urllib3[socks] flexget kinopoiskpy python-telegram-bot
