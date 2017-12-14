@@ -18,7 +18,8 @@ if [[ "$TORRENT_PLUGIN" == *"deluge"* ]]; then
         gcc \
         python2-dev \
         libxml2-dev \
-        libxslt-dev
+        libxslt-dev \
+        py2-chardet
 
     pip2 install -U \
         constantly \
