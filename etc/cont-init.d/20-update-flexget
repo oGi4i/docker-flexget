@@ -4,7 +4,7 @@ apk add --no-cache \
     --repository http://nl.alpinelinux.org/alpine/edge/main \
     rsync
 
-pip install --no-cache-dir -U pip
+pip install --no-cache-dir -U pip setuptools>=36
 # Make sure to install setuptools version >=36 to avoid a race condition, see:
 # https://github.com/pypa/setuptools/issues/951
-pip install --no-cache-dir -U setuptools>=36 urllib3[socks] flexget kinopoiskpy python-telegram-bot
+pip install --no-cache-dir -U urllib3[socks] flexget subliminal kinopoiskpy python-telegram-bot

@@ -1,8 +1,8 @@
-# cpoppema/docker-flexget
+# ogi4i/docker-flexget
 
 Read all about FlexGet [here](http://www.flexget.com/#Description).
 
-If you do not have a configuration already, you can look around starting off with something like this [config.yml](https://github.com/cpoppema/docker-flexget/blob/master/sample_config.yml):
+If you do not have a configuration already, you can look around starting off with something like this [config.yml](https://github.com/ogi4i/docker-flexget/blob/master/sample_config.yml):
 ```
 web_server: yes
 
