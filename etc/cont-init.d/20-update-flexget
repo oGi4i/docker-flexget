@@ -2,7 +2,8 @@
 
 apk add --no-cache \
     --repository http://nl.alpinelinux.org/alpine/edge/main \
-    rsync
+    rsync \
+    cdrkit
 
 pip install --no-cache-dir -U pip setuptools>=36
 # Make sure to install setuptools version >=36 to avoid a race condition, see:
