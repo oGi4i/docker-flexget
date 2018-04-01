@@ -1,25 +1,9 @@
 #!/usr/bin/with-contenv bash
 
 if [[ "$TORRENT_PLUGIN" == *"deluge"* ]]; then
-    # Dependency for libtorrent-rasterbar.
-    apk add --no-cache \
-        --repository http://nl.alpinelinux.org/alpine/edge/main \
-        libressl-dev \
-
     apk add --no-cache \
         --repository http://nl.alpinelinux.org/alpine/edge/testing \
         deluge
-
-    # Deluge is missing dependencies.
-    # https://bugs.alpinelinux.org/issues/7154
-
-    apk add --no-cache --virtual=build-dependencies \
-        g++ \
-        gcc \
-        python2-dev \
-        libxml2-dev \
-        libxslt-dev \
-        py2-chardet
 
     pip2 install -U \
         constantly \
