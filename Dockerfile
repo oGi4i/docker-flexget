@@ -4,7 +4,9 @@ FROM lsiobase/alpine.python:3.7
 ENV PYTHONIOENCODING="UTF-8"
 
 RUN apk add --no-cache \
-    --repository http://nl.alpinelinux.org/alpine/edge/main \
+    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+    libressl2.7-libcrypto \
     rsync \
     cdrkit \
     py2-chardet \
@@ -13,7 +15,8 @@ RUN apk add --no-cache \
     boost-python
 
 RUN apk add --no-cache --virtual=build-dependencies \
-    --repository http://nl.alpinelinux.org/alpine/edge/main \
+    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
     g++ \
     gcc \
     python2-dev \
