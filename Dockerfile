@@ -12,7 +12,8 @@ RUN apk add --no-cache \
     py2-chardet \
     py2-lxml \
     boost-system \
-    boost-python
+    boost-python \
+    boost-libs
 
 RUN apk add --no-cache --virtual=build-dependencies \
     --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
