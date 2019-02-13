@@ -1,46 +1,30 @@
-FROM lsiobase/alpine.python:3.7
+FROM lsiobase/alpine.python3
 
-# Set python to use utf-8 rather than ascii.
-ENV PYTHONIOENCODING="UTF-8"
-
-RUN apk add --no-cache \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    libressl2.7-libcrypto \
-    rsync \
-    cdrkit \
-    py2-chardet \
-    py2-lxml \
-    boost \
-    boost-python \
-
-RUN apk add --no-cache --virtual=build-dependencies \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    g++ \
-    gcc \
-    python2-dev \
-    libffi-dev \
-    libxml2-dev \
-    libxslt-dev \
-    libressl-dev
-
-RUN pip install --no-cache-dir -U pip setuptools>=36 lxml
-
-# Make sure to install setuptools version >=36 to avoid a race condition, see:
-# https://github.com/pypa/setuptools/issues/951
-RUN pip install --no-cache-dir urllib3[socks] flexget subliminal kinopoiskpy python-telegram-bot
-
-# Copy local files.
 COPY etc/ /etc
-RUN chmod -v +x \
-    /etc/cont-init.d/*  \
-    /etc/services.d/*/run
 
-RUN apk del build-dependencies
+RUN apk --no-cache update && apk add --no-cache \
+        git \
+        rsync \
+        cdrkit \
+    && apk add --no-cache --virtual=build-dependencies \
+        build-base \
+        gcc \
+        libffi-dev \
+        openssl-dev \
+        libxml2-dev \
+        libxslt-dev \
+    && pip install --no-cache-dir -U pip kinopoiskpy python-telegram-bot deluge-client \
+    && git clone https://github.com/Flexget/Flexget.git /flexget-dev \
+    && cd /flexget-dev \
+    && pip install --no-cache-dir -e . \
+    && chmod -v +x \
+        /etc/cont-init.d/*  \
+        /etc/services.d/*/run \
+    && apk del build-dependencies \
+    && rm -rf /tmp/*
 
-# Ports and volumes.
-EXPOSE 5050/tcp
+# No Web-UI at the moment
+# EXPOSE 5050/tcp
 VOLUME /config
 
 WORKDIR /config
