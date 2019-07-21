@@ -21,7 +21,7 @@ RUN apk --no-cache update && apk add --no-cache \
         /etc/services.d/*/run \
     && apk del build-dependencies \
     && cd /usr/lib/python3.6/site-packages/flexget/components/tmdb \
-    && patch < /tmp/tmdb_lookup.py.patch
+    && patch < /tmp/tmdb_lookup.py.patch \
     && rm -rf /tmp/*
 
 EXPOSE 5050/tcp
