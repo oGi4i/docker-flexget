@@ -1,0 +1,10 @@
+--- /usr/lib/python3.6/site-packages/flexget/components/tmdb/tmdb_lookup.py
++++ /usr/lib/python3.6/site-packages/flexget/components/tmdb/tmdb_lookup.py
+@@ -28,6 +28,7 @@
+
+     field_map = {
+         'tmdb_name': 'name',
++        'tmdb_original_name': 'original_name',
+         'tmdb_id': 'id',
+         'imdb_id': 'imdb_id',
+         'tmdb_year': 'year',
