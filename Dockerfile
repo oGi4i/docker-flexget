@@ -16,6 +16,7 @@ RUN apk --no-cache update && apk add --no-cache \
         openssl-dev \
         libxml2-dev \
         libxslt-dev \
+        python3-dev \
     && pip install --no-cache-dir -U pip flexget kinopoiskpy python-telegram-bot deluge-client \
     && chmod -v +x \
         /etc/cont-init.d/*  \
