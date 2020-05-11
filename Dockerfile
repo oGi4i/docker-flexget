@@ -2,8 +2,8 @@ FROM lsiobase/alpine.python3
 
 COPY etc/ /etc
 
-RUN mkdir /patches
-COPY tmdb_lookup.py.patch /patches
+COPY tmdb_lookup.py.patch /tmp
+COPY rsync-movies /usr/local/bin
 
 RUN apk --no-cache update && apk add --no-cache \
         git \
@@ -23,7 +23,7 @@ RUN apk --no-cache update && apk add --no-cache \
         /etc/services.d/*/run \
     && apk del build-dependencies \
     && cd /usr/lib/python3.6/site-packages/flexget/components/tmdb \
-    && patch < /patches/tmdb_lookup.py.patch \
+    && patch < /tmp/tmdb_lookup.py.patch \
     && rm -rf /tmp/*
 
 EXPOSE 5050/tcp

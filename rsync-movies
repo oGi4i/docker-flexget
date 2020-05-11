@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+
+def find_movie(movie_name, movie_year, movie_quality):
+    from kinopoisk.movie import Movie
+
+    movies = [m for m in Movie.objects.search("{0} {1}".format(movie_name, movie_year)) if m.year == int(movie_year) and m.title_en != ""]
+
+    if len(movies) == 0:
+        return ''
+
+    movie = movies[0]
+
+    quality = "2160p UHD-Rip" if "2160p bluray" in movie_quality else "2160p WEB-DL" if "2160p webdl" in movie_quality else "1080p WEB-DL" if "1080p webdl" in movie_quality else "1080p BD-Rip"
+
+    return '{0} [{1}] ({2}) {3}.mkv'.format(movie.title.replace(':', ' -'), movie.title_en.replace(':', ' -'), movie_year, quality)
+
+
+def exec_rsync(src_path, dst_path):
+    from os import system
+
+    system('rsync -rq --delete-after --size-only "{0}" "{1}"'.format(src_path, dst_path))
+
+
+def main():
+    from sys import argv
+    from os.path import join
+
+    if len(argv) < 6:
+        exit(1)
+
+    src_path = argv[1]
+    dst_path = argv[2]
+    movie_name = argv[3]
+    movie_year = argv[4]
+    movie_quality = argv[5]
+
+    dst_filename = find_movie(movie_name, movie_year, movie_quality)
+    if dst_filename == '':
+        exit(1)
+
+    exec_rsync(src_path, join(dst_path, dst_filename))
+
+
+if __name__ == '__main__':
+    main()
