@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv bash
 
 pip install --no-cache-dir -U flexget kinopoiskpy python-telegram-bot \
-&& patch -d /usr/lib/python3.6/site-packages/flexget/components/tmdb -i /patches/tmdb_lookup.py.patch
+&& cd /usr/lib/python3.6/site-packages/flexget/components/tmdb \
+&& patch -i /patches/tmdb_lookup.py.patch
