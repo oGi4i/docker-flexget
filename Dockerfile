@@ -2,8 +2,8 @@ FROM lsiobase/alpine.python3
 
 COPY etc/ /etc
 
-COPY tmdb_lookup.py.patch /tmp
-COPY rsync-movies /usr/local/bin
+COPY patches/ /patches
+COPY scripts/ /usr/local/bin
 
 RUN apk --no-cache update && apk add --no-cache \
         git \
@@ -18,12 +18,11 @@ RUN apk --no-cache update && apk add --no-cache \
         libxslt-dev \
         python3-dev \
     && pip install --no-cache-dir -U pip flexget kinopoiskpy python-telegram-bot deluge-client \
+    && patch -d /usr/lib/python3.6/site-packages/flexget/components/tmdb -i /patches/tmdb_lookup.py.patch \
     && chmod -v +x \
         /etc/cont-init.d/*  \
         /etc/services.d/*/run \
     && apk del build-dependencies \
-    && cd /usr/lib/python3.6/site-packages/flexget/components/tmdb \
-    && patch < /tmp/tmdb_lookup.py.patch \
     && rm -rf /tmp/*
 
 EXPOSE 5050/tcp
