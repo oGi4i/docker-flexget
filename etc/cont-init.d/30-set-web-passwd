@@ -8,8 +8,8 @@
 #
 
 if [ ! -f /config/.password-lock ]; then
-    if [ ! -z "$WEB_PASSWD" ]; then
-        s6-setuidgid abc touch /config/.password-lock
-        s6-setuidgid abc /usr/bin/flexget -c /config/config.yml --loglevel "${FLEXGET_LOG_LEVEL:-debug}" web passwd "$WEB_PASSWD"
+    if [ -n "$WEB_PASSWD" ]; then
+        touch /config/.password-lock
+        /usr/local/bin/flexget -c /config/config.yml --loglevel "${FLEXGET_LOG_LEVEL:-debug}" web passwd "$WEB_PASSWD"
     fi
 fi
