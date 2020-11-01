@@ -25,7 +25,7 @@ RUN apk --no-cache update && apk add --no-cache \
         libxml2-dev \
         libxslt-dev \
         python3-dev \
-    && pip install --no-cache-dir -U pip flexget kinopoiskpy python-telegram-bot \
+    && pip install --no-cache-dir -U pip flexget kinopoiskpy python-telegram-bot==12.8 \
     && chmod -v +x \
         /etc/cont-init.d/*  \
         /etc/services.d/*/run \
