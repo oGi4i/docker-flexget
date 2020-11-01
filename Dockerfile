@@ -26,8 +26,6 @@ RUN apk --no-cache update && apk add --no-cache \
         libxslt-dev \
         python3-dev \
     && pip install --no-cache-dir -U pip flexget kinopoiskpy python-telegram-bot \
-    && cd /usr/local/lib/python3.8/site-packages/flexget/components/tmdb \
-    && patch -t -i /patches/tmdb_lookup.py.patch \
     && chmod -v +x \
         /etc/cont-init.d/*  \
         /etc/services.d/*/run \
