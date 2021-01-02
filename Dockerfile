@@ -17,13 +17,13 @@ RUN apk --no-cache update && apk add --no-cache \
         git \
         rsync \
         cdrkit \
+        libxml2-dev \
+        libxslt-dev \
     && apk add --no-cache --virtual=build-dependencies \
         build-base \
         gcc \
         libffi-dev \
         openssl-dev \
-        libxml2-dev \
-        libxslt-dev \
         python3-dev \
     && pip install --no-cache-dir -U pip flexget kinopoiskpy python-telegram-bot==12.8 \
     && chmod -v +x \
