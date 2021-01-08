@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+
+def exec_rsync_replace(src_path, dst_path):
+    from os import system
+
+    system('rsync -rq --delete-after --size-only "{0}" "{1}"'.format(src_path, dst_path))
+
+
+def exec_rsync_append(src_path, dst_path):
+    from os import system
+
+    system('rsync -rq --size-only "{0}" "{1}"'.format(src_path, dst_path))
+
+
+def main():
+    from sys import argv
+    from os.path import join, getmtime
+    from pathlib import Path
+
+    if len(argv) < 6:
+        exit(1)
+
+    mode = argv[1]
+    src_path = argv[2]
+    dst_path = argv[3]
+    series_name = argv[4]
+    season = argv[5]
+
+    if mode == 'replace':
+        exec_rsync_replace(src_path, join(dst_path, series_name, 'Season {}'.format(season)))
+    elif mode == 'append':
+        files = sorted(Path(src_path).iterdir(), key=getmtime, reverse=True)
+        exec_rsync_append(files[0].as_posix(), join(dst_path, series_name, 'Season {}'.format(season)))
+    else:
+        raise Exception('Unsupported operation mode: {}'.format(mode))
+
+
+if __name__ == '__main__':
+    main()
