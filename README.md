@@ -111,6 +111,3 @@ Part of what makes this container work so well is by allowing you to specify you
 
 * Upgrade to the latest version of FlexGet simply `docker restart flexget`.
 * Monitor the logs of the container in realtime `docker logs -f flexget`.
-
-**Credits**
-* [linuxserver.io](https://github.com/linuxserver) for providing awesome docker containers.
