@@ -9,23 +9,19 @@ ENTRYPOINT ["/init"]
 
 COPY etc/ /etc
 COPY patches/ /patches
-COPY scripts/ /usr/local/bin
 
 RUN apk --no-cache update && apk add --no-cache \
         patch \
         bash \
         git \
         rsync \
-        cdrkit \
-        libxml2-dev \
-        libxslt-dev \
     && apk add --no-cache --virtual=build-dependencies \
         build-base \
         gcc \
         libffi-dev \
         openssl-dev \
         python3-dev \
-    && pip install --no-cache-dir -U pip flexget kinopoiskpy python-telegram-bot==12.8 \
+    && pip install --no-cache-dir -U pip flexget python-telegram-bot==12.8 \
     && chmod -v +x \
         /etc/cont-init.d/*  \
         /etc/services.d/*/run \
